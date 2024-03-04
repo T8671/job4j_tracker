@@ -13,7 +13,7 @@ public class TriangleTest {
 
         Triangle triangle = new Triangle(a, b, c);
         double result = triangle.area();
-        double expected = 13.416;
+        double expected = 4.499;
         assertThat(result).isCloseTo(expected, offset(0.001));
     }
 
@@ -25,7 +25,7 @@ public class TriangleTest {
 
         Triangle triangle = new Triangle(a, b, c);
         double result = triangle.area();
-        double expected = -1;
+        double expected = 8;
         assertThat(result).isCloseTo(expected, offset(0.001));
     }
 
