@@ -29,4 +29,16 @@ public class TriangleTest {
         assertThat(result).isCloseTo(expected, offset(0.001));
     }
 
+    @Test
+    public void when00and40and04ThenMinus0() {
+        Point a = new Point(0, 3);
+        Point b = new Point(0, 0);
+        Point c = new Point(0, 0);
+
+        Triangle triangle = new Triangle(a, b, c);
+        double result = triangle.area();
+        double expected = -1;
+        assertThat(result).isCloseTo(expected, offset(0.001));
+    }
+
 }
