@@ -2,13 +2,12 @@ package ru.job4j.polymorphism;
 
 public class Bus implements Transport {
     @Override
-    public String drive() {
-        return null;
+    public void drive() {
     }
 
     @Override
-    public int passengers(int passengers) {
-        return passengers;
+    public void passengers(int passengers) {
+        System.out.println("Число пассажиров" + passengers);
     }
 
     @Override

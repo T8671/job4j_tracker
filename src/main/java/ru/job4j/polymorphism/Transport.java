@@ -1,11 +1,11 @@
 package ru.job4j.polymorphism;
 
 public interface Transport {
-    String drive();
+    void drive();
 
-    int passengers(int passengers);
+    void passengers(int passengers);
 
-    default int fillUp(int fuel) {
+     default int fillUp(int fuel) {
         return fuel * 65;
     }
 }
