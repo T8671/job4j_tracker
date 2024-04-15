@@ -8,12 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class FactorialTest {
 
     @Test
-    void whenException() {
+    public void whenException() {
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> {
-                    Factorial.calc(-1);
-                });
+                () -> Factorial.calc(-1));
         assertThat(exception.getMessage()).isEqualTo("Number could not be less than 0");
+    }
+
+    @Test
+    public void whenNoException() {
+        int expected = 3628800;
+        int result = Factorial.calc(10);
+        assertThat(result).isEqualTo(expected);
     }
 }
