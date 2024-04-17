@@ -5,10 +5,13 @@ import javax.swing.text.TableView;
 public class UserStore {
 
     public static User findUser(User[] users, String login) throws UserNotFoundException {
-        for (int i = 0; i < users.length; i++) {
-            if (users[i].getUsername().equals(login)) {
-                return users[i];
-            } else {
+        for (User user : users) {
+            if (user.getUsername().equals(login)) {
+                return user;
+            }
+        }
+        for (User user : users) {
+            if (!user.getUsername().equals(login)) {
                 throw new UserNotFoundException("Пользователя не найдено");
             }
         }
@@ -16,13 +19,10 @@ public class UserStore {
     }
 
     public static boolean validate(User user) throws UserInvalidException {
-        if (user.getUsername().length() < 3) {
+        if (user.getUsername().length() < 3 || !user.isValid()) {
             throw new UserInvalidException("Пользователь не валидный");
         }
-        if (!user.isValid()) {
-            throw new UserInvalidException("Пользователь не валидный");
-        }
-        return false;
+        return true;
     }
 
     public static void main(String[] args) throws UserNotFoundException {
@@ -39,10 +39,6 @@ public class UserStore {
             ui.printStackTrace();
         } catch (UserNotFoundException un) {
             un.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } catch (Throwable th) {
-            th.printStackTrace();
         }
     }
 }
