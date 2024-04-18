@@ -9,11 +9,7 @@ public class UserStore {
             if (user.getUsername().equals(login)) {
                 return user;
             }
-        }
-        for (User user : users) {
-            if (!user.getUsername().equals(login)) {
-                throw new UserNotFoundException("Пользователя не найдено");
-            }
+            throw new UserNotFoundException("Пользователя не найдено");
         }
         return null;
     }
