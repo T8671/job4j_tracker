@@ -1,45 +1,41 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tracker {
-    private final Item[] items = new Item[100];
-
+    private final List<Item> items = new ArrayList<>();
     private int ids = 1;
-    private int size = 0;
 
     public Item add(Item item) {
         item.setId(ids++);
-        items[size++] = item;
+        items.add(item);
         return item;
     }
 
-    public Item[] findAll() {
-        return Arrays.copyOf(items, size);
+    public List<Item> findAll() {
+        return List.copyOf(items);
     }
 
-    public Item[] findByName(String key) {
-        Item[] result = new Item[items.length];
-        int count = 0;
-        for (int i = 0; i < size; i++) {
-            Item item = items[i];
+    public List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
+        for (Item item : items) {
             if (key.equals(item.getName())) {
-                result[count] = item;
-                count++;
+                result.add(item);
             }
         }
-        return Arrays.copyOf(result, count);
+        return result;
     }
 
     public Item findById(int id) {
         int i = indexOf(id);
-        return i != -1 ? items[i] : null;
+        return i != -1 ? items.get(i) : null;
     }
 
     private int indexOf(int id) {
         int result = -1;
-        for (int i = 0; i < size; i++) {
-            if (items[i].getId() == id) {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getId() == id) {
                 result = i;
                 break;
             }
@@ -52,7 +48,7 @@ public class Tracker {
         boolean result = i != -1;
         if (result) {
             item.setId(id);
-            items[i] = item;
+            items.set(i, item);
         }
         return result;
     }
@@ -60,9 +56,7 @@ public class Tracker {
     public void delete(int id) {
         int i = indexOf(id);
         if (i != -1) {
-            System.arraycopy(items, i + 1, items, i, size - i - 1);
-            items[size - 1] = null;
-            size--;
+            items.remove(i);
         }
     }
 }
