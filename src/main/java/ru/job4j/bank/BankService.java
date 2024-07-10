@@ -14,9 +14,7 @@ public class BankService {
 
     public void deleteUser(String passport) {
         for (User user : users.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                users.remove(user);
-            }
+            users.remove(new User(passport, ""));
         }
     }
 
@@ -24,21 +22,8 @@ public class BankService {
         User user = findByPassport(passport);
         if (user != null) {
             List<Account> accounts = users.get(user);
-            if (accounts != null) {
-                boolean accountExists = false;
-                for (Account acc : accounts) {
-                    if (acc.getRequisite().equals(account.getRequisite())) {
-                        accountExists = true;
-                        break;
-                    }
-                }
-                if (!accountExists) {
-                    accounts.add(account);
-                }
-            } else {
-                accounts = new ArrayList<>();
+            if (!accounts.contains(account)) {
                 accounts.add(account);
-                users.put(user, accounts);
             }
         }
     }
@@ -56,11 +41,9 @@ public class BankService {
         User user = findByPassport(passport);
         if (user != null) {
             List<Account> accounts = users.get(user);
-            if (accounts != null) {
-                for (Account account : accounts) {
-                    if (account.getRequisite().equals(requisite)) {
-                        return account;
-                    }
+            for (Account account : accounts) {
+                if (account.getRequisite().equals(requisite)) {
+                    return account;
                 }
             }
         }
