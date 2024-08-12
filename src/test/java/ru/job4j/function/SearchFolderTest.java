@@ -11,11 +11,11 @@ class SearchFolderTest {
     @Test
     public void whenFilerSize() {
         List<Folder> list = List.of(
-                new Folder("fix", 100),
+                new Folder("fix", 110),
                 new Folder("bug", 75),
                 new Folder("bug", 90)
         );
-        List<Folder> expected = List.of(new Folder("fix", 100));
+        List<Folder> expected = List.of(new Folder("fix", 110));
         Predicate<Folder> predicate = folder -> folder.getSize() > 100;
         List<Folder> result = SearchFolder.filter(list, predicate);
         assertThat(result).containsAll(expected);
