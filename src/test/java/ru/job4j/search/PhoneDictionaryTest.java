@@ -10,29 +10,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PhoneDictionaryTest {
     @Test
     public void whenFindByName() {
-        PhoneDictionary phones = new PhoneDictionary();
-        phones.add(
-                new Person(
-                        "Petr",
-                        "Arsentev",
-                        "534872",
-                        "Bryansk")
+        var phones = new PhoneDictionary();
+        var person = new Person(
+                "Petr",
+                "Arsentev",
+                "534872",
+                "Bryansk"
         );
-        ArrayList<Person> persons = phones.find("Petr");
+        phones.add(person);
+        var persons = phones.find("Petr");
         assertThat(persons.get(0).getSurname()).isEqualTo("Arsentev");
     }
 
     @Test
     public void whenNothingIsFound() {
-        PhoneDictionary phones = new PhoneDictionary();
-        phones.add(
-                new Person(
-                        "Petr",
-                        "Arsentev",
-                        "534872",
-                        "Bryansk")
+        var phones = new PhoneDictionary();
+        var person = new Person(
+                "Petr",
+                "Arsentev",
+                "534872",
+                "Bryansk"
         );
-        ArrayList<Person> persons = phones.find("Bob");
+        phones.add(person);
+        var persons = phones.find("Bob");
         assertTrue(persons.isEmpty(), "Expected no person to be found");
     }
 }
